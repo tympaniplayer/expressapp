@@ -11,9 +11,13 @@ router.get('/test', function(req, res, next) {
 router.get('/connect', function(req, res, next){
   res.setHeader('Content-Type', 'application/json');
 
-  db.connect();
+  db.addCattle();
 
-  res.status(200).send(JSON.stringify({success: true}));
+  res.status(200).json({success: true});
 })
+
+router.post('/add', function(req, res, next){
+  res.status(200).json(req.body);
+});
 
 module.exports = router;
