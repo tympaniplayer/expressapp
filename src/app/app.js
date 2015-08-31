@@ -4,13 +4,24 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var api = require('./routes/api');
-
-
+var mongoose = require('mongoose');
+var cattle = require('./CattleTrack/Models/Cattle');
 var app = express();
 
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/cattletrack');
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'Mongo connection error: '));
+db.once('open', function(callback){
+  console.log("Mongoose connected");
+});
 
 
+// bootstrap routes
+var api = require('./routes/api');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
